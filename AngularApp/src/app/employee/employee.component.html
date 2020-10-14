@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-content white-text">
+        <div class="row">
+          <div class="col-md-6">
+            <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+              <input
+                type="hidden"
+                name="_id"
+                [(ngModel)]="employeeService.selectedEmployee._id"
+              />
+              <div class="input-field">
+                <input
+                  type="text"
+                  name="name"
+                  [(ngModel)]="employeeService.selectedEmployee.name"
+                  placeholder="Enter Full Name"
+                  required
+                />
+                <label>Name : <label class="red-text">*</label></label>
+              </div>
+              <div class="input-field">
+                <input
+                  type="text"
+                  name="email"
+                  [(ngModel)]="employeeService.selectedEmployee.email"
+                  placeholder="Enter Email"
+                  required
+                />
+                <label>Email : <label class="red-text">*</label></label>
+              </div>
+              <div class="input-field">
+                <input
+                  type="text"
+                  name="position"
+                  [(ngModel)]="employeeService.selectedEmployee.position"
+                  placeholder="Enter position"
+                />
+                <label>position :</label>
+              </div>
+              <div class="input-field">
+                <input
+                  type="text"
+                  name="office"
+                  [(ngModel)]="employeeService.selectedEmployee.office"
+                  placeholder="Enter office"
+                />
+                <label>office :</label>
+              </div>
+              <div class="input-field">
+                <input
+                  type="number"
+                  name="salary"
+                  [(ngModel)]="employeeService.selectedEmployee.salary"
+                  placeholder="Enter salary"
+                />
+                <label>salary :</label>
+              </div>
+              <div class="row">
+                <div class="input-field col-sm-6">
+                  <button
+                    class="btn btn-custom"
+                    type="submit"
+                    [disabled]="!employeeForm.valid"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    class="btn btn-custom"
+                    type="button"
+                    (click)="resetForm(employeeForm)"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <table class="responsive-table highlight table-color table table-striped">
+              <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Salary</th>
+                <th>Action</th>
+              </thead>
+              <tr *ngFor="let emp of employeeService.employees">
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.email }}</td>
+                <td>{{ emp.position }}</td>
+                <td>{{ emp.office }}</td>
+                <td>{{ emp.salary }}</td>
+                <td>
+                  <a class="action-btn" (click)="onEdit(emp)">Edit</a> /
+                  <a
+                    class="action-btn"
+                    (click)="onDelete(emp._id, employeeForm)"
+                    >Delete</a
+                  >
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
